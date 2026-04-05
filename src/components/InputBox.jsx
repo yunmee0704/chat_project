@@ -13,7 +13,7 @@ export function InputBox({ value, onChange, onSend, disabled }) {
       <input
         type="text"
         className="input-box__field"
-        placeholder="메시지를 입력하세요..."
+        placeholder="예: 실손이랑 암만 알고 싶어요"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}

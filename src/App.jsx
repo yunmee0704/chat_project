@@ -70,11 +70,8 @@ function App() {
   return (
     <div className="app">
       <header className="app__header">
-        <div className="app__header-row">
-          <h1 className="app__title">보험 챗봇</h1>
-          <span className="app__demo-badge">목데이터 데모</span>
-        </div>
-        <p className="app__subtitle">API 키 없이 배포 가능한 포트폴리오용 버전입니다.</p>
+        <h1 className="app__title">보험 상담</h1>
+        <p className="app__subtitle">짧게 써도 돼요. 실손·암·자동차 같은 말만 있어도 됩니다.</p>
       </header>
       <main className="app__main">
         <MessageList messages={messages} loading={loading} />
