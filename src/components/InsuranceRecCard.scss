@@ -1,0 +1,136 @@
+// Samsung Insurance Concierge 스타일 추천 카드
+$ins-navy-dark: #172554;
+$ins-navy: #1e3a8a;
+$ins-blue: #2563eb;
+$ins-badge-bg: #dbeafe;
+$ins-badge-text: #1d4ed8;
+$ins-text: #111827;
+$ins-muted: #6b7280;
+$ins-price-bg: #f0f2f7;
+$ins-border: #e5e7eb;
+
+.ins-rec-card {
+  margin-top: 10px;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid $ins-border;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+}
+
+.ins-rec-card__banner {
+  position: relative;
+  min-height: 88px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  color: #fff;
+  background:
+    linear-gradient(135deg, $ins-navy-dark 0%, $ins-navy 50%, $ins-blue 100%),
+    radial-gradient(ellipse 80% 60% at 90% 20%, rgba(255, 255, 255, 0.12), transparent 55%);
+}
+
+.ins-rec-card__banner-kicker {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.92;
+}
+
+.ins-rec-card__banner-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.ins-rec-card__body {
+  padding: 16px 18px 18px;
+}
+
+.ins-rec-card__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ins-rec-card__product-name {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: $ins-text;
+  line-height: 1.3;
+}
+
+.ins-rec-card__badge {
+  flex-shrink: 0;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: $ins-badge-text;
+  background: $ins-badge-bg;
+  padding: 6px 9px;
+  border-radius: 6px;
+}
+
+.ins-rec-card__desc {
+  margin: 0 0 14px;
+  font-size: 0.875rem;
+  color: $ins-muted;
+  line-height: 1.5;
+}
+
+.ins-rec-card__price-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: $ins-price-bg;
+  border-radius: 8px;
+}
+
+.ins-rec-card__price-label {
+  font-size: 0.8125rem;
+  color: $ins-muted;
+}
+
+.ins-rec-card__price-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: $ins-navy;
+  letter-spacing: -0.02em;
+}
+
+.ins-rec-card__cta {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: $ins-navy;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.ins-rec-card__cta:hover {
+  background: $ins-navy-dark;
+}
+
+.ins-rec-card__cta:focus-visible {
+  outline: 2px solid $ins-blue;
+  outline-offset: 2px;
+}
+
+.ins-rec-card__cta:active {
+  transform: scale(0.995);
+}

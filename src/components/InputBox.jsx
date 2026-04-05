@@ -1,0 +1,33 @@
+import './InputBox.scss'
+
+export function InputBox({ value, onChange, onSend, disabled }) {
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      if (!disabled && value.trim()) onSend()
+    }
+  }
+
+  return (
+    <div className="input-box">
+      <input
+        type="text"
+        className="input-box__field"
+        placeholder="메시지를 입력하세요..."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyDown={handleKeyDown}
+        disabled={disabled}
+        aria-label="메시지 입력"
+      />
+      <button
+        type="button"
+        className="input-box__send"
+        onClick={onSend}
+        disabled={disabled || !value.trim()}
+      >
+        보내기
+      </button>
+    </div>
+  )
+}
