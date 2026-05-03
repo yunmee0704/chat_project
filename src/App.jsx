@@ -5,66 +5,56 @@ import { pickInsuranceProduct } from './data/insuranceProducts'
 import { getMockAssistantReply } from './utils/mockChat'
 import './App.scss'
 
-/**
- * 목데이터 안내 문구에 보험 키워드가 들어가므로, 카드 표시는 사용자 입력만 본다.
- * (OpenAI 연동 `chat` 프로젝트는 AI 답변도 함께 본다.)
- */
 function shouldShowInsuranceCard(userText) {
-  const u = userText.trim()
+  var text = userText.trim().toLowerCase()
+  var insuranceKeywords = ['보험', '실손', '암보험', '건강보험', '상해보험', '종신', '연금보험', '자동차보험', '화재보험']
+  var recommendKeywords = ['보험', '상품', '가입', '플랜', '보장']
+  var i = 0
 
-  if (/보험|실손|암보험|건강보험|상해보험|종신|연금보험|자동차보험|화재보험/i.test(u)) {
-    return true
+  for (i = 0; i < insuranceKeywords.length; i += 1) {
+    if (text.includes(insuranceKeywords[i])) {
+      return true
+    }
   }
-  if (/추천/.test(u) && /보험|상품|가입|플랜|보장/.test(u)) {
-    return true
+
+  if (text.includes('추천')) {
+    for (i = 0; i < recommendKeywords.length; i += 1) {
+      if (text.includes(recommendKeywords[i])) {
+        return true
+      }
+    }
   }
+
   return false
 }
 
 function App() {
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
-  const [loading, setLoading] = useState(false)
 
-  async function handleSend() {
+  function handleSend() {
     const text = input.trim()
-    if (!text || loading) return
+    if (!text) return
 
     const userMessage = { id: crypto.randomUUID(), role: 'user', content: text }
 
     setMessages((prev) => [...prev, userMessage])
     setInput('')
-    setLoading(true)
 
-    try {
-      const aiText = await getMockAssistantReply(text)
-      const showInsuranceRec = shouldShowInsuranceCard(text)
-      const insuranceRec = showInsuranceRec
-        ? pickInsuranceProduct(text, aiText)
-        : null
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: crypto.randomUUID(),
-          role: 'assistant',
-          content: aiText,
-          showInsuranceRec,
-          insuranceRec,
-        },
-      ])
-    } catch (e) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: crypto.randomUUID(),
-          role: 'assistant',
-          content: `오류가 발생했습니다: ${e.message}`,
-          showInsuranceRec: false,
-        },
-      ])
-    } finally {
-      setLoading(false)
-    }
+    const aiText = getMockAssistantReply(text)
+    const showInsuranceRec = shouldShowInsuranceCard(text)
+    const insuranceRec = showInsuranceRec ? pickInsuranceProduct(text, aiText) : null
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: aiText,
+        showInsuranceRec,
+        insuranceRec,
+      },
+    ])
   }
 
   return (
@@ -74,14 +64,14 @@ function App() {
         <p className="app__subtitle">짧게 써도 돼요. 실손·암·자동차 같은 말만 있어도 됩니다.</p>
       </header>
       <main className="app__main">
-        <MessageList messages={messages} loading={loading} />
+        <MessageList messages={messages} />
       </main>
       <footer className="app__footer">
         <InputBox
           value={input}
           onChange={setInput}
           onSend={handleSend}
-          disabled={loading}
+          disabled={false}
         />
       </footer>
     </div>

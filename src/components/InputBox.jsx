@@ -1,10 +1,14 @@
 import './InputBox.scss'
 
 export function InputBox({ value, onChange, onSend, disabled }) {
+  var canSend = !disabled && value.trim() !== ''
+
   function handleKeyDown(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      if (!disabled && value.trim()) onSend()
+      if (canSend) {
+        onSend()
+      }
     }
   }
 
@@ -23,8 +27,12 @@ export function InputBox({ value, onChange, onSend, disabled }) {
       <button
         type="button"
         className="input-box__send"
-        onClick={onSend}
-        disabled={disabled || !value.trim()}
+        onClick={() => {
+          if (canSend) {
+            onSend()
+          }
+        }}
+        disabled={!canSend}
       >
         보내기
       </button>

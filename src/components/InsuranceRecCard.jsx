@@ -1,22 +1,21 @@
 import './InsuranceRecCard.scss'
 
-const defaultProps = {
+var defaultProps = {
   bannerKicker: 'PREMIUM SELECTION',
   badge: 'VERIFIED',
   ctaLabel: '상세보기',
   premiumLabel: '예상 월 납입보험료',
 }
 
-export function InsuranceRecCard({
-  bannerKicker = defaultProps.bannerKicker,
-  bannerTitle,
-  productName,
-  description,
-  premium,
-  premiumLabel = defaultProps.premiumLabel,
-  badge = defaultProps.badge,
-  ctaLabel = defaultProps.ctaLabel,
-}) {
+export function InsuranceRecCard(props) {
+  var bannerKicker = props.bannerKicker || defaultProps.bannerKicker
+  var bannerTitle = props.bannerTitle || ''
+  var productName = props.productName || ''
+  var description = props.description || ''
+  var premium = props.premium || ''
+  var premiumLabel = props.premiumLabel || defaultProps.premiumLabel
+  var badge = props.badge || defaultProps.badge
+  var ctaLabel = props.ctaLabel || defaultProps.ctaLabel
   const ariaLabel = `추천 상품: ${productName}, ${bannerTitle}`
 
   return (
