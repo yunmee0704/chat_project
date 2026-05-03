@@ -6,7 +6,7 @@ import { getMockAssistantReply } from './utils/mockChat'
 import './App.scss'
 
 function shouldShowInsuranceCard(userText) {
-  var text = userText.trim().toLowerCase()
+  var text = userText.trim()
   var insuranceKeywords = ['보험', '실손', '암보험', '건강보험', '상해보험', '종신', '연금보험', '자동차보험', '화재보험']
   var recommendKeywords = ['보험', '상품', '가입', '플랜', '보장']
   var i = 0
